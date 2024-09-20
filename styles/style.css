@@ -1,0 +1,163 @@
+/* Центрирование контейнера с использованием Flexbox */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #fff, #ff9999); /* Мягкий градиент от белого к светло-красному */
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite; /* Плавная анимация фона */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    position: relative; /* Для анимации сердечек */
+    overflow: hidden; /* Чтобы сердечки не выходили за пределы экрана */
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive; /* Красивый рукописный шрифт */
+    color: #ff4d4d; /* Мягкий красный цвет */
+    font-size: 2.5em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Тень для объёма */
+    animation: fadeIn 3s ease-in-out;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    color: #333; /* Тёмно-серый цвет для контраста */
+    font-size: 1.2em;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Анимация градиентного фона */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Контейнер для всего содержимого */
+.container {
+    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный фон для текста */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 90%; /* Делаем контейнер гибким, но ограничиваем по ширине */
+    text-align: center;
+    margin: auto;
+    z-index: 1; /* Чтобы контейнер был поверх сердечек */
+}
+
+/* Flexbox для изображения */
+.image-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    max-width: 300px; /* Ограничиваем ширину контейнера с изображением */
+    margin: 20px auto;
+    position: relative;
+}
+
+/* Настройка для изображений */
+.image {
+    max-width: 100%; /* Изображение не будет больше, чем контейнер */
+    height: auto; /* Сохраняем пропорции изображения */
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.first {
+    opacity: 1;
+    animation: fadeOut 6s infinite;
+}
+
+.second {
+    animation: fadeIn 6s infinite;
+}
+
+/* Анимация плавной смены изображений */
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Аудиоплеер */
+audio {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px; /* Ограничиваем размер аудиоплеера */
+}
+
+/* Контейнер для сердечек */
+
+#hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none; /* Чтобы сердечки не мешали взаимодействию с контентом */
+    z-index: 0; /* Сердечки находятся под контентом */
+}
+
+/* Стили для сердечек */
+.heart {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    transform: rotate(45deg); /* Начальная форма сердца */
+    animation: fall 5s linear infinite, rotateHeart 5s linear infinite; /* Добавляем анимацию падения и вращения */
+    z-index: 0;
+}
+
+.heart::before, .heart::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -7.5px;
+    left: 0;
+}
+
+.heart::after {
+    left: 7.5px;
+    top: 0;
+}
+
+/* Анимация падения сердечек */
+@keyframes fall {
+    0% {
+        top: -10%;
+        opacity: 1;
+    }
+    100% {
+        top: 110%;
+        opacity: 0;
+    }
+}
+
+/* Плавная анимация вращения */
+@keyframes rotateHeart {
+    0% {
+        transform: rotate(45deg);
+    }
+    100% {
+        transform: rotate(405deg); /* Плавное вращение */
+    }
+}
